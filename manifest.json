@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema",
+  "vendor": "vtex",
+  "name": "graphql-gateway",
+  "version": "0.0.1-beta.1",
+  "title": "GraphQL Gateway for VTEX APIs",
+  "description": "A Graph containing all VTEX's commerce APIs",
+  "builders": {
+    "node": "6.x"
+  },
+  "dependencies": {
+    "vtex.search-resolver": "0.x",
+    "vtex.checkout-graphql": "0.x"
+  },
+  "credentialType": "absolute",
+  "policies": [
+    {
+      "name": "graphql-query"
+    },
+    {
+      "attrs": {
+        "host": "*",
+        "path": "*"
+      },
+      "name": "outbound-access"
+    }
+  ]
+}
