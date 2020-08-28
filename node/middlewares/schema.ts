@@ -21,6 +21,7 @@ const executor = (app: string): AsyncExecutor => async ({
 }) => {
   const {
     vtex: { account, workspace, authToken },
+    request: { headers },
   } = (context as unknown) as Context
 
   const { name, version } = parseAppId(app)
@@ -34,6 +35,7 @@ const executor = (app: string): AsyncExecutor => async ({
       headers: {
         'Content-Type': 'application/json',
         Authorization: authToken,
+        cookie: headers.cookie,
         'x-vtex-locale': 'en-US',
         'x-vtex-tenant': 'en-US',
       },
