@@ -17,9 +17,10 @@ const fieldName = 'vtex'
 
 const executor = (
   app: string,
-  ctx: Context,
   { shouldForwardCookie = false } = {}
-): AsyncExecutor => async ({ document, variables }) => {
+): AsyncExecutor => async ({ document, variables, context }) => {
+  const ctx = (context as unknown) as Context
+
   const {
     vtex: { account, workspace, authToken },
     request: { headers },
@@ -57,8 +58,8 @@ export default async function schema(ctx: Context, next: () => Promise<void>) {
       apps.map(async app =>
         wrapSchema(
           {
-            schema: await introspectSchema(executor(app, ctx), ctx),
-            executor: executor(app, ctx, { shouldForwardCookie: true }),
+            schema: await introspectSchema(executor(app), ctx),
+            executor: executor(app, { shouldForwardCookie: true }),
           },
           [
             new RenameTypes(name => `${typeName}_${name}`),

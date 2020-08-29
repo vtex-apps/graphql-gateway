@@ -34,7 +34,14 @@ const replaceDomain = (host: string, cookie: string) =>
 export function forwardAllowedCookies(rawHeaders: Headers, ctx: Context) {
   const responseSetCookies: string[] = (rawHeaders as any).raw()['set-cookie']
 
-  const host = ctx.get('x-forwarded-host')
+  const isLocalhost =
+    ctx.get('origin').includes('://localhost') ||
+    ctx.get('origin').includes('://127.0.0.1')
+
+  const host = isLocalhost ? 'localhost' : ctx.get('x-forwarded-host')
+
+  ctx.vary('origin')
+
   const forwardedSetCookies = responseSetCookies.filter(isAllowedSetCookie)
 
   const cleanCookies = forwardedSetCookies.map((cookie: string) =>
