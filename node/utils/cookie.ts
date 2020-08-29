@@ -32,7 +32,8 @@ const replaceDomain = (host: string, cookie: string) =>
   cookie.replace(/domain=.+?(;|$)/, `domain=${host};`)
 
 export function forwardAllowedCookies(rawHeaders: Headers, ctx: Context) {
-  const responseSetCookies: string[] = (rawHeaders as any).raw()['set-cookie']
+  const responseSetCookies: string[] =
+    (rawHeaders as any).raw()['set-cookie'] ?? []
 
   const isLocalhost =
     ctx.get('origin').includes('://localhost') ||
