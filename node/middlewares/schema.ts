@@ -6,6 +6,7 @@ import { GraphQLSchema, print } from 'graphql'
 import fetch from 'isomorphic-unfetch'
 
 import { NamespaceUnderFieldTransform } from '../transformers/namespaceUnderField'
+import { forwardAllowedCookies } from '../utils/cookie'
 
 let globalSchema: GraphQLSchema | null = null
 
@@ -14,15 +15,15 @@ const apps = ['vtex.search-resolver@0.x', 'vtex.checkout-graphql@0.x']
 const typeName = 'VTEX'
 const fieldName = 'vtex'
 
-const executor = (app: string): AsyncExecutor => async ({
-  document,
-  variables,
-  context,
-}) => {
+const executor = (
+  app: string,
+  ctx: Context,
+  { shouldForwardCookie = false } = {}
+): AsyncExecutor => async ({ document, variables }) => {
   const {
     vtex: { account, workspace, authToken },
     request: { headers },
-  } = (context as unknown) as Context
+  } = ctx
 
   const { name, version } = parseAppId(app)
   const major = versionToMajor(version)
@@ -43,6 +44,10 @@ const executor = (app: string): AsyncExecutor => async ({
     }
   )
 
+  if (shouldForwardCookie) {
+    forwardAllowedCookies(fetchResult.headers, ctx)
+  }
+
   return fetchResult.json()
 }
 
@@ -52,8 +57,8 @@ export default async function schema(ctx: Context, next: () => Promise<void>) {
       apps.map(async app =>
         wrapSchema(
           {
-            schema: await introspectSchema(executor(app), ctx),
-            executor: executor(app),
+            schema: await introspectSchema(executor(app, ctx), ctx),
+            executor: executor(app, ctx, { shouldForwardCookie: true }),
           },
           [
             new RenameTypes(name => `${typeName}_${name}`),
