@@ -19,7 +19,17 @@ interface PersistedQuery extends Query {
 const isPersistedQuery = (query: any): query is PersistedQuery =>
   !!query.extensions
 
-const parseString = (x: any) => (typeof x === 'string' ? JSON.parse(x) : x)
+const parseString = (x: unknown) => {
+  if (typeof x !== 'string') {
+    return x
+  }
+
+  try {
+    return JSON.parse(x)
+  } catch {
+    return {}
+  }
+}
 
 export default async function extract(ctx: Context, next: () => Promise<void>) {
   const {
@@ -32,10 +42,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
   const query = {
     query: rawQuery.query,
     operationName: rawQuery.operationName,
-    variables:
-      typeof rawQuery.variables === 'string'
-        ? parseString(rawQuery.variables)
-        : rawQuery.variables,
+    variables: parseString(rawQuery.variables),
     extensions: parseString(rawQuery.extensions),
   }
 
