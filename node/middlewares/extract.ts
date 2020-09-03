@@ -32,7 +32,10 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
   const query = {
     query: rawQuery.query,
     operationName: rawQuery.operationName,
-    variables: parseString(rawQuery.variables),
+    variables:
+      typeof rawQuery.variables === 'string'
+        ? parseString(rawQuery.variables)
+        : rawQuery.variables,
     extensions: parseString(rawQuery.extensions),
   }
 
