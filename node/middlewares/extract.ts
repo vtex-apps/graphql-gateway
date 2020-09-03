@@ -24,11 +24,11 @@ const parseString = (x: unknown) => {
     return x
   }
 
-  try {
-    return JSON.parse(x)
-  } catch {
-    return {}
+  if (x === 'undefined') {
+    return undefined
   }
+
+  return JSON.parse(x)
 }
 
 export default async function extract(ctx: Context, next: () => Promise<void>) {
