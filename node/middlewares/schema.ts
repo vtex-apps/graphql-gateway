@@ -9,7 +9,7 @@ import { NamespaceUnderFieldTransform } from '../transformers/namespaceUnderFiel
 
 let globalSchema: GraphQLSchema | null = null
 
-const apps = ['vtex.search-resolver@0.x', 'vtex.checkout-graphql@0.x']
+const apps = ['vtex.search-resolver@1.x', 'vtex.checkout-graphql@0.x']
 
 const typeName = 'VTEX'
 const fieldName = 'vtex'
