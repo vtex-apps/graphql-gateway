@@ -79,7 +79,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
       }).then((res: any) => res.json())
 
       if (!persisted?.[sha256Hash]) {
-        throw new Error(`URL ${url} does not contains hash ${sha256Hash}`)
+        throw new Error(`URL ${url} does not contains hash ${sha256Hash}. ${JSON.stringify(persisted)}`)
       }
 
       // update local storage
