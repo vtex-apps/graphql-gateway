@@ -70,6 +70,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
       const persisted = await fetch(url, {
         method: 'GET',
         headers: {
+          'cache-control': 'no-cache',
           'Content-Type': 'application/json',
           'x-vtex-use-https': 'true',
           accept: 'application/json',
