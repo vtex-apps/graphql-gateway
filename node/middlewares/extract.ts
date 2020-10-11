@@ -1,7 +1,6 @@
 import parse from 'co-body'
 import { LRUCache } from '@vtex/api'
 import fetch from 'isomorphic-unfetch'
-import { inspect } from 'util'
 
 const storage = new LRUCache<string, string | undefined>({
   max: 1e3,
