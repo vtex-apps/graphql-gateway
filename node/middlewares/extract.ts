@@ -79,7 +79,8 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
         try {
           return await res.json()
         } catch (err) {
-          throw new Error(`Error caught while fetching persisted query json ${await res.text()}`)
+          console.error(err)
+          throw err
         }
       })
 
