@@ -75,7 +75,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
           accept: 'application/json',
           Authorization: authToken,
         },
-      }).then(async (res) => {
+      }).then(async (res: Response) => {
         try {
           return await res.json()
         } catch (err) {
