@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema",
   "vendor": "vtex",
   "name": "graphql-gateway",
-  "version": "0.2.0",
+  "version": "0.2.1-beta.6",
   "title": "GraphQL Gateway for VTEX APIs",
   "description": "A Graph containing all VTEX's commerce APIs",
   "builders": {

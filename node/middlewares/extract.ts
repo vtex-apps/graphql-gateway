@@ -73,7 +73,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
           'Content-Type': 'application/json',
           'x-vtex-use-https': 'true',
           accept: 'application/json',
-          Authorization: authToken,
+          'Proxy-Authorization': authToken,
         },
       }).then((res: any) => res.json())
 
