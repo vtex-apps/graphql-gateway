@@ -1,6 +1,7 @@
 import parse from 'co-body'
 import { LRUCache } from '@vtex/api'
 import fetch from 'isomorphic-unfetch'
+import { inspect } from 'util'
 
 const storage = new LRUCache<string, string | undefined>({
   max: 1e3,
@@ -73,16 +74,9 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
           'Content-Type': 'application/json',
           'x-vtex-use-https': 'true',
           accept: 'application/json',
-          Authorization: authToken,
+          'Proxy-Authorization': authToken,
         },
-      }).then(async (res: any) => {
-        try {
-          return await res.json()
-        } catch (err) {
-          console.error(err)
-          throw err
-        }
-      })
+      }).then((res: any) => res.json())
 
       if (!persisted?.[sha256Hash]) {
         throw new Error(`URL ${url} does not contains hash ${sha256Hash}`)
