@@ -75,7 +75,13 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
           accept: 'application/json',
           Authorization: authToken,
         },
-      }).then((res: any) => res.json())
+      }).then(async (res) => {
+        try {
+          return await res.json()
+        } catch (err) {
+          throw new Error(`Error caught while fetching persisted query json ${res.text()}`)
+        }
+      })
 
       if (!persisted?.[sha256Hash]) {
         throw new Error(`URL ${url} does not contains hash ${sha256Hash}`)
