@@ -33,7 +33,7 @@ const parseString = (x: unknown) => {
 
 export default async function extract(ctx: Context, next: () => Promise<void>) {
   const {
-    vtex: { authToken },
+    vtex: { authToken, logger },
   } = ctx
 
   const rawQuery =
@@ -67,27 +67,35 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
       const url = `http://${storageHost}/page-data/_graphql/persisted.graphql.json`
 
       // fetch persisted.json from remote
-      const persisted = await fetch(url, {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'x-vtex-use-https': 'true',
+          'x-vtex-proxy-to': `https://${storageHost}`,
           accept: 'application/json',
           'Proxy-Authorization': authToken,
         },
-      }).then((res: any) => res.json())
-
-      if (!persisted?.[sha256Hash]) {
-        throw new Error(`URL ${url} does not contains hash ${sha256Hash}`)
-      }
-
-      // update local storage
-      Object.keys(persisted).forEach(hash => {
-        storage.set(hash, persisted[hash])
       })
+      const responseText = await response.text()
 
-      // set query and continue
-      query.query = persisted[sha256Hash]
+      try {
+        const persisted = JSON.parse(responseText)
+
+        if (!persisted?.[sha256Hash]) {
+          throw new Error(`URL ${url} does not contains hash ${sha256Hash}`)
+        }
+
+        // update local storage
+        Object.keys(persisted).forEach(hash => {
+          storage.set(hash, persisted[hash])
+        })
+
+        // set query and continue
+        query.query = persisted[sha256Hash]
+      } catch (err) {
+        logger.error({url, response: responseText.slice(0, 300), headers: response.headers})
+        throw err
+      }
     }
 
     // Delete extensions so apollo does not try to parse the persisted query again
