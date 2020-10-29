@@ -16,7 +16,7 @@ const format = (cacheControl: CacheControl) =>
     typeof cacheControl.staleIfError === 'number' &&
       `stale-if-error=${cacheControl.staleIfError}`,
     typeof cacheControl.staleWhileRevalidate === 'number' &&
-      `stale-if-error=${cacheControl.staleWhileRevalidate}`,
+      `stale-while-revalidate=${cacheControl.staleWhileRevalidate}`,
     typeof cacheControl.sharedMaxAge === 'number' &&
       `s-maxage=${cacheControl.sharedMaxAge}`,
     typeof cacheControl.maxAge === 'number' && `max-age=${cacheControl.maxAge}`,
