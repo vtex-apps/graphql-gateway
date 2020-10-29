@@ -7,12 +7,18 @@
     "@graphql-tools/wrap": "^6.0.15",
     "@types/co-body": "^5.1.0",
     "apollo-server-core": "^2.16.1",
+    "axios": "^0.21.0",
+    "cache-control-parser": "^1.0.7",
     "co-body": "^6.0.0",
+    "eslint-config-vtex": "^12.8.8",
     "graphql": "^15.3.0",
-    "isomorphic-unfetch": "^3.0.0"
+    "isomorphic-unfetch": "^3.1.0"
   },
   "devDependencies": {
     "@vtex/api": "6.36.3",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "vtex.checkout-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-graphql@0.46.0/public/@types/vtex.checkout-graphql",
+    "vtex.graphql-gateway": "https://gimenes--marinbrasil.myvtex.com/_v/private/typings/linked/v1/vtex.graphql-gateway@0.4.0+build1603980034/public/_types/react",
+    "vtex.search-resolver": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-resolver@1.22.3/public/_types/react"
   }
 }
