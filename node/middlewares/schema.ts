@@ -52,7 +52,7 @@ const executor = (app: string): AsyncExecutor => async ({
   const cacheControl = response.headers['cache-control']
 
   if (cacheControl) {
-    state.cacheControl.push()
+    state.cacheControl.push(cacheControl)
   }
 
   return response.data
