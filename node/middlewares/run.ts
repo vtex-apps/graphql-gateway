@@ -8,10 +8,7 @@ export default async function run(ctx: Context, next: () => Promise<void>) {
     request,
   } = ctx
 
-  const {
-    graphqlResponse,
-    responseInit: { headers },
-  } = await runHttpQuery([], {
+  const { graphqlResponse, responseInit } = await runHttpQuery([], {
     method,
     options: {
       cacheControl: {
@@ -22,20 +19,14 @@ export default async function run(ctx: Context, next: () => Promise<void>) {
       debug: LINKED,
       schema,
       schemaHash: '' as any,
-      tracing: true,
+      tracing: false,
     },
     query,
     request,
   })
 
   ctx.body = graphqlResponse
-
-  // Set Headers
-  for (const [key, value] of Object.entries(headers ?? {})) {
-    ctx.set(key, value)
-  }
-
-  ctx.set('cache-control', 'no-cache, no-store')
+  ctx.state.responseInit = responseInit
 
   await next()
 }

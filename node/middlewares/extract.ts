@@ -76,6 +76,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
           'Proxy-Authorization': authToken,
         },
       })
+
       const responseText = await response.text()
 
       try {
@@ -93,7 +94,11 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
         // set query and continue
         query.query = persisted[sha256Hash]
       } catch (err) {
-        logger.error({url, response: responseText.slice(0, 300), headers: response.headers})
+        logger.error({
+          url,
+          response: responseText.slice(0, 300),
+          headers: response.headers,
+        })
         throw err
       }
     }
