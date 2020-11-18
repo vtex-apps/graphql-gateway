@@ -74,6 +74,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
           'x-vtex-proxy-to': `https://${storageHost}`,
           accept: 'application/json',
           'Proxy-Authorization': authToken,
+          'cookie': 'VtexStoreVersion=v2;'
         },
       })
 
