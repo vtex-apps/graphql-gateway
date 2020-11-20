@@ -42,7 +42,7 @@ const executor = (app: string): AsyncExecutor => async ({
       accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: authToken,
-      'x-forwarded-host': `.${(context as any).get('x-vtex-graphql-referer')}`,
+      'x-forwarded-host': (context as any).get('x-vtex-graphql-referer'),
       'x-vtex-locale': 'en-US',
       'x-vtex-tenant': 'en-US',
     },
