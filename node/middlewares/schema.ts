@@ -53,7 +53,7 @@ const executor = (app: string): AsyncExecutor => async ({
   const setCookie = response.headers['set-cookie']
 
   if (setCookie) {
-    ;(context as any).response.set('set-cookie', setCookie)
+    ctx.set('set-cookie', setCookie)
   }
 
   if (cacheControl) {
