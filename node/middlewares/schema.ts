@@ -42,7 +42,7 @@ const executor = (app: string): AsyncExecutor => async ({
       accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: authToken,
-      // 'x-forwarded-host': `.${(context as any).get('x-vtex-graphql-referer')}`,
+      'x-forwarded-host': (context as any).get('x-vtex-graphql-referer'),
       'x-vtex-locale': 'en-US',
       'x-vtex-tenant': 'en-US',
     },
@@ -52,8 +52,12 @@ const executor = (app: string): AsyncExecutor => async ({
   const cacheControl = response.headers['cache-control']
   const setCookie = response.headers['set-cookie']
 
-  if (setCookie) {
-    ctx.set('set-cookie', setCookie)
+  if (Array.isArray(setCookie)) {
+    for (const c of setCookie) {
+      ctx.set('set-cookie', `${c}; secure`)
+    }
+  } else if (setCookie) {
+    ctx.set('set-cookie', `${setCookie}; secure`)
   }
 
   if (cacheControl) {

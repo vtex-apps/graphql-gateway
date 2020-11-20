@@ -15,7 +15,7 @@
     "isomorphic-unfetch": "^3.1.0"
   },
   "devDependencies": {
-    "@vtex/api": "6.36.3",
+    "@vtex/api": "6.37.0",
     "typescript": "3.9.7",
     "vtex.checkout-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-graphql@0.46.0/public/@types/vtex.checkout-graphql",
     "vtex.graphql-gateway": "https://gimenes--marinbrasil.myvtex.com/_v/private/typings/linked/v1/vtex.graphql-gateway@0.4.0+build1603980034/public/_types/react",
