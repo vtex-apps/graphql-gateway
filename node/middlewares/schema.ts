@@ -52,12 +52,8 @@ const executor = (app: string): AsyncExecutor => async ({
   const cacheControl = response.headers['cache-control']
   const setCookie = response.headers['set-cookie']
 
-  if (Array.isArray(setCookie)) {
-    for (const c of setCookie) {
-      ctx.set('set-cookie', `${c}; secure`)
-    }
-  } else if (setCookie) {
-    ctx.set('set-cookie', `${setCookie}; secure`)
+  if (setCookie) {
+    ctx.set('set-cookie', setCookie)
   }
 
   if (cacheControl) {
