@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.0] - 2020-11-23
+
 ## [0.6.0] - 2020-11-18
 ### Added
 - Fixed `VtexStoreVersion` cookie with `v2` value to power AB test.
