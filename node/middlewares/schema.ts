@@ -50,6 +50,11 @@ const executor = (app: string): AsyncExecutor => async ({
   })
 
   const cacheControl = response.headers['cache-control']
+  const setCookie = response.headers['set-cookie']
+
+  if (setCookie) {
+    ctx.set('set-cookie', setCookie)
+  }
 
   if (cacheControl) {
     state.cacheControl.push(cacheControl)
