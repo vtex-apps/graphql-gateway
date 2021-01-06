@@ -1,34 +1,34 @@
 Arguments: 
-  /Users/lucis/.nvm/versions/node/v12.18.3/bin/node /Users/lucis/.config/yarn/global/node_modules/yarn/bin/yarn.js --non-interactive --ignore-engines
+  /usr/local/Cellar/node/15.3.0/bin/node /Users/gimenes/.config/yarn/global/node_modules/vtex/node_modules/yarn/bin/yarn.js --non-interactive --ignore-engines
 
 PATH: 
-  /Users/lucis/.nvm/versions/node/v12.18.3/bin:/Users/lucis/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/lucis/.vtex/dev/bin
+  /usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
 
 Yarn version: 
   1.22.4
 
 Node version: 
-  12.18.3
+  15.3.0
 
 Platform: 
   darwin x64
 
 Trace: 
   Error: https://gimenes--marinbrasil.myvtex.com/_v/private/typings/linked/v1/vtex.graphql-gateway@0.4.0+build1603980034/public/_types/react: Request failed "500 Internal Server Error"
-      at ResponseError.ExtendableBuiltin (/Users/lucis/.config/yarn/global/node_modules/yarn/lib/cli.js:696:66)
-      at new ResponseError (/Users/lucis/.config/yarn/global/node_modules/yarn/lib/cli.js:802:124)
-      at Request.<anonymous> (/Users/lucis/.config/yarn/global/node_modules/yarn/lib/cli.js:67057:16)
-      at Request.emit (events.js:315:20)
-      at Request.module.exports.Request.onRequestResponse (/Users/lucis/.config/yarn/global/node_modules/yarn/lib/cli.js:141625:10)
-      at ClientRequest.emit (events.js:315:20)
-      at HTTPParser.parserOnIncomingClient [as onIncoming] (_http_client.js:596:27)
-      at HTTPParser.parserOnHeadersComplete (_http_common.js:119:17)
-      at TLSSocket.socketOnData (_http_client.js:469:22)
-      at TLSSocket.emit (events.js:315:20)
+      at ResponseError.ExtendableBuiltin (/Users/gimenes/.config/yarn/global/node_modules/vtex/node_modules/yarn/lib/cli.js:696:66)
+      at new ResponseError (/Users/gimenes/.config/yarn/global/node_modules/vtex/node_modules/yarn/lib/cli.js:802:124)
+      at Request.<anonymous> (/Users/gimenes/.config/yarn/global/node_modules/vtex/node_modules/yarn/lib/cli.js:67057:16)
+      at Request.emit (node:events:376:20)
+      at Request.module.exports.Request.onRequestResponse (/Users/gimenes/.config/yarn/global/node_modules/vtex/node_modules/yarn/lib/cli.js:141625:10)
+      at ClientRequest.emit (node:events:376:20)
+      at HTTPParser.parserOnIncomingClient (node:_http_client:664:27)
+      at HTTPParser.parserOnHeadersComplete (node:_http_common:126:17)
+      at TLSSocket.socketOnData (node:_http_client:530:22)
+      at TLSSocket.emit (node:events:376:20)
 
 npm manifest: 
   {
-    "version": "0.5.0",
+    "version": "0.7.0",
     "dependencies": {
       "@apollo/federation": "^0.18.1",
       "@graphql-tools/delegate": "^6.0.15",
@@ -44,7 +44,7 @@ npm manifest:
       "isomorphic-unfetch": "^3.1.0"
     },
     "devDependencies": {
-      "@vtex/api": "6.36.3",
+      "@vtex/api": "6.37.1",
       "typescript": "3.9.7",
       "vtex.checkout-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-graphql@0.46.0/public/@types/vtex.checkout-graphql",
       "vtex.graphql-gateway": "https://gimenes--marinbrasil.myvtex.com/_v/private/typings/linked/v1/vtex.graphql-gateway@0.4.0+build1603980034/public/_types/react",
@@ -469,10 +469,10 @@ Lockfile:
     dependencies:
       eslint-visitor-keys "^1.1.0"
   
-  "@vtex/api@6.36.3":
-    version "6.36.3"
-    resolved "https://registry.yarnpkg.com/@vtex/api/-/api-6.36.3.tgz#d827944829fb289d3a826cac12874f8e33ce62f5"
-    integrity sha512-i7zZ0Mj5pGEr6wd8VCK/hhiKTmmiuTn44v9MlWn36MRvtfBfOsKlhMFUEv3HBT1MH+fQTNM9vY08uSy7BsG44w==
+  "@vtex/api@6.37.0":
+    version "6.37.0"
+    resolved "https://registry.yarnpkg.com/@vtex/api/-/api-6.37.0.tgz#a07e6adbfc02866f901cf0cfff2155f2c279adc5"
+    integrity sha512-Vy970ZfgOttrxeiJW2oM8rQ0E8t/HE5cQhbGIawfJsu35HEWA9NnWRSR3bdLMczT9oYIY9QwE8IfdU4b44dhKw==
     dependencies:
       "@types/koa" "^2.11.0"
       "@types/koa-compose" "^3.2.3"
@@ -2435,7 +2435,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.6.tgz#c80757383c28abf7296744998cbc106ae8b854ce"
     integrity sha512-+orQK83kyMva3WyPf59k1+Y525csj5JejicWut55zeTWANuN17qSiSLUXWtzHeNWORSvT7GLDJ/E/XiIWoXBTw==
   
-  stats-lite@vtex/node-stats-lite#dist:
+  "stats-lite@github:vtex/node-stats-lite#dist":
     version "2.2.0"
     resolved "https://codeload.github.com/vtex/node-stats-lite/tar.gz/1b0d39cc41ef7aaecfd541191f877887a2044797"
     dependencies:
