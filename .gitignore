@@ -5,3 +5,4 @@ service/**/*.js.map
 .vscode/
 **/.DS_Store
 .eslintrc
+**/yarn-error.log
