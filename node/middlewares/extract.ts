@@ -76,10 +76,10 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
       const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
           'x-vtex-proxy-to': `https://${storageHost}`,
-          accept: 'application/json',
+          accept: 'application/json; charset=utf-8',
           'Proxy-Authorization': authToken,
+          'accept-encoding': 'gzip',
           // Cookie used to AB-test FastStore stores
           cookie: 'VtexStoreVersion=v2;',
         },
