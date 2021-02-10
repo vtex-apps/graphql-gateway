@@ -1,10 +1,6 @@
+import { VBase } from '@vtex/api'
 import parse from 'co-body'
-import { LRUCache } from '@vtex/api'
 import fetch from 'isomorphic-unfetch'
-
-const storage = new LRUCache<string, string | undefined>({
-  max: 1e3,
-})
 
 interface PersistedQuery extends Query {
   extensions: {
@@ -13,6 +9,15 @@ interface PersistedQuery extends Query {
       sha256Hash: string
       storage: string
     }
+  }
+}
+
+const BUCKET = 'persistedQueries'
+
+const saveAsync = async (persisted: Record<string, string>, vbase: VBase) => {
+  for (const hash of Object.keys(persisted)) {
+    // eslint-disable-next-line no-await-in-loop
+    await vbase.saveJSON(BUCKET, hash, persisted[hash]).catch(console.error)
   }
 }
 
@@ -34,6 +39,7 @@ const parseString = (x: unknown) => {
 export default async function extract(ctx: Context, next: () => Promise<void>) {
   const {
     vtex: { authToken, logger },
+    clients: { vbase },
   } = ctx
 
   const rawQuery =
@@ -55,7 +61,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
       },
     } = query
 
-    const maybeQuery = storage.get(sha256Hash)
+    const maybeQuery = await vbase.getJSON<string>(BUCKET, sha256Hash, true)
 
     // Query is already in our local storage. Just translate i
     if (maybeQuery) {
@@ -70,12 +76,12 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
       const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
           'x-vtex-proxy-to': `https://${storageHost}`,
-          accept: 'application/json',
+          accept: 'application/json; charset=utf-8',
           'Proxy-Authorization': authToken,
+          'accept-encoding': 'gzip',
           // Cookie used to AB-test FastStore stores
-          'cookie': 'VtexStoreVersion=v2;'
+          cookie: 'VtexStoreVersion=v2;',
         },
       })
 
@@ -89,9 +95,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
         }
 
         // update local storage
-        Object.keys(persisted).forEach(hash => {
-          storage.set(hash, persisted[hash])
-        })
+        saveAsync(persisted, vbase).catch(console.error)
 
         // set query and continue
         query.query = persisted[sha256Hash]

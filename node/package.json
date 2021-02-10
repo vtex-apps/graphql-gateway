@@ -15,7 +15,7 @@
     "isomorphic-unfetch": "^3.1.0"
   },
   "devDependencies": {
-    "@vtex/api": "6.37.1",
+    "@vtex/api": "6.39.1",
     "typescript": "3.9.7",
     "vtex.admin-cms-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.admin-cms-graphql@0.15.0/public/@types/vtex.admin-cms-graphql",
     "vtex.checkout-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-graphql@0.55.1/public/@types/vtex.checkout-graphql",
