@@ -3,8 +3,6 @@ import { parseAppId, versionToMajor } from '@vtex/api'
 import http from 'axios'
 import { print } from 'graphql'
 
-import { md5 } from './md5'
-
 export const executor = (
   app: string,
   axiosOptions?: (ctx: Context) => { headers: Record<string, string> }
@@ -19,16 +17,12 @@ export const executor = (
   const major = versionToMajor(version)
   const query = print(document)
   const data = JSON.stringify({ query, variables })
-  const hash = md5(data)
-  const method = document.definitions.every((d: any) => d.operation === 'query')
-    ? 'GET'
-    : 'POST'
 
   const options = axiosOptions?.(ctx)
 
   const response = await http.request({
-    method,
-    url: `http://app.io.vtex.com/${name}/v${major}/${account}/${workspace}/_v/graphql?__graphqlBodyHash=${hash}`,
+    method: 'POST',
+    url: `http://app.io.vtex.com/${name}/v${major}/${account}/${workspace}/_v/graphql`,
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json',
