@@ -46,7 +46,11 @@ const parseVariables = (x: unknown) => {
     return undefined
   }
 
-  return JSON.parse(atob(x))
+  try {
+    return JSON.parse(atob(x))
+  } catch (err) {
+    return JSON.parse(x)
+  }
 }
 
 export default async function extract(ctx: Context, next: () => Promise<void>) {
