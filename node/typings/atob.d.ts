@@ -1,3 +1,3 @@
-declare module 'btoa' {
-  export default function btoa(x: string): string
+declare module 'atob' {
+  export default function atob(x: string): string
 }
