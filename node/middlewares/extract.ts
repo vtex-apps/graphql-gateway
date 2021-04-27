@@ -1,6 +1,7 @@
 import { VBase } from '@vtex/api'
 import parse from 'co-body'
 import fetch from 'isomorphic-unfetch'
+import atob from 'atob'
 
 interface PersistedQuery extends Query {
   extensions: {
@@ -36,6 +37,18 @@ const parseString = (x: unknown) => {
   return JSON.parse(x)
 }
 
+const parseVariables = (x: unknown) => {
+  if (typeof x !== 'string') {
+    return x
+  }
+
+  if (x === 'undefined') {
+    return undefined
+  }
+
+  return JSON.parse(atob(x))
+}
+
 export default async function extract(ctx: Context, next: () => Promise<void>) {
   const {
     vtex: { authToken, logger },
@@ -48,7 +61,7 @@ export default async function extract(ctx: Context, next: () => Promise<void>) {
   const query = {
     query: rawQuery.query,
     operationName: rawQuery.operationName,
-    variables: parseString(rawQuery.variables),
+    variables: parseVariables(rawQuery.variables),
     extensions: parseString(rawQuery.extensions),
   }
 
