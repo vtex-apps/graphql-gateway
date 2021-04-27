@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema",
-  "vendor": "vtex",
+  "vendor": "carrefourbrfood",
   "name": "graphql-gateway",
   "version": "0.12.0-beta.0",
   "title": "GraphQL Gateway for VTEX APIs",
