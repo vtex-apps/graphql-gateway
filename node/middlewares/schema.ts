@@ -1,6 +1,7 @@
 import { mergeSchemas } from '@graphql-tools/merge'
 import {
   FilterRootFields,
+  FilterTypes,
   introspectSchema,
   RenameTypes,
   wrapSchema,
@@ -16,6 +17,17 @@ const typeName = 'VTEX'
 const fieldName = 'vtex'
 
 const apps = [
+  {
+    app: 'vtex.recommendation-resolver@0.x',
+    executor: getExecutorForApp,
+    transforms: [
+      new FilterTypes(
+        type => !['Product', 'SKU', 'Seller', 'Offer'].includes(type.name)
+      ),
+      new RenameTypes(name => `${typeName}_${name}`),
+      new NamespaceUnderFieldTransform(typeName, fieldName),
+    ],
+  },
   {
     app: 'vtex.search-resolver@1.x',
     executor: getExecutorForApp,
