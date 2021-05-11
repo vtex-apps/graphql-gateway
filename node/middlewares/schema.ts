@@ -24,7 +24,7 @@ const apps = [
       new FilterTypes(
         type => !['Product', 'SKU', 'Seller', 'Offer'].includes(type.name)
       ),
-      new RenameTypes(name => `${typeName}_${name}`),
+      new RenameTypes(name => `${typeName}_RecommendationResolver_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
@@ -32,7 +32,7 @@ const apps = [
     app: 'vtex.search-resolver@1.x',
     executor: getExecutorForApp,
     transforms: [
-      new RenameTypes(name => `${typeName}_${name}`),
+      new RenameTypes(name => `${typeName}_SearchResolver_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
@@ -40,7 +40,7 @@ const apps = [
     app: 'vtex.checkout-graphql@0.x',
     executor: getExecutorForApp,
     transforms: [
-      new RenameTypes(name => `${typeName}_${name}`),
+      new RenameTypes(name => `${typeName}_CheckoutGraphql_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
