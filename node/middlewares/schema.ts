@@ -16,8 +16,6 @@ let globalSchema: GraphQLSchema | null = null
 const typeName = 'VTEX'
 const fieldName = 'vtex'
 
-const renameType = (name: string) => `${typeName}_${name}`
-
 const apps = [
   {
     app: 'vtex.recommendation-resolver@0.x',
