@@ -16,6 +16,8 @@ let globalSchema: GraphQLSchema | null = null
 const typeName = 'VTEX'
 const fieldName = 'vtex'
 
+const renameType = (name: string) => `${typeName}_${name}`
+
 const apps = [
   {
     app: 'vtex.recommendation-resolver@0.x',
@@ -24,7 +26,7 @@ const apps = [
       new FilterTypes(
         type => !['Product', 'SKU', 'Seller', 'Offer'].includes(type.name)
       ),
-      new RenameTypes(name => `${typeName}_${name}`),
+      new RenameTypes(name => `${typeName}_ReccomendationResolver_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
@@ -35,7 +37,7 @@ const apps = [
       new FilterTypes(
         type => !['Recommendation'].includes(type.name)
       ),
-      new RenameTypes(name => `${typeName}_${name}`),
+      new RenameTypes(name => `${typeName}_SearchResolver_ ${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
@@ -43,7 +45,7 @@ const apps = [
     app: 'vtex.checkout-graphql@0.x',
     executor: getExecutorForApp,
     transforms: [
-      new RenameTypes(name => `${typeName}_${name}`),
+      new RenameTypes(name => `${typeName}_CheckoutGraphql_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
