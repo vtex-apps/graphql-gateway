@@ -32,6 +32,9 @@ const apps = [
     app: 'vtex.search-resolver@1.x',
     executor: getExecutorForApp,
     transforms: [
+      new FilterTypes(
+        type => !['Recommendation'].includes(type.name)
+      ),
       new RenameTypes(name => `${typeName}_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
