@@ -25,14 +25,6 @@ const apps = [
     ],
   },
   {
-    app: 'vtex.recommendation-resolver@0.x',
-    executor: getExecutorForApp,
-    transforms: [
-      new RenameTypes(name => `${typeName}_${name}`),
-      new NamespaceUnderFieldTransform(typeName, fieldName),
-    ],
-  },
-  {
     app: 'vtex.checkout-graphql@0.x',
     executor: getExecutorForApp,
     transforms: [
