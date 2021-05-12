@@ -24,7 +24,7 @@ const apps = [
       new FilterTypes(
         type => !['Product', 'SKU', 'Seller', 'Offer'].includes(type.name)
       ),
-      new RenameTypes(name => `${typeName}_RecommendationResolver_${name}`),
+      new RenameTypes(name => `${typeName}_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
