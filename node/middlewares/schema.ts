@@ -33,7 +33,7 @@ const apps = [
     ],
   },
   {
-    app: 'vtex.admin-cms-graphql@0.x',
+    app: 'vtex.admin-cms-graphql-rc@0.x',
     executor: (app: string) =>
       getExecutorForApp(app, ({ vtex: { authToken } }: Context) => ({
         headers: {
