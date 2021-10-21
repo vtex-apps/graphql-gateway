@@ -44,6 +44,7 @@ const apps = [
       })),
     transforms: [
       new FilterRootFields(operation => operation === 'Query'),
+      new RenameTypes(name => `${typeName}_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
