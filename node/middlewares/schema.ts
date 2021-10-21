@@ -44,7 +44,8 @@ const apps = [
       })),
     transforms: [
       new FilterRootFields(
-        (operation, rootField) => operation === 'Query' && rootField === 'pages'
+        (operation, rootField) =>
+          operation === 'Query' && rootField === 'contents'
       ),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
