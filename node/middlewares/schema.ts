@@ -43,10 +43,7 @@ const apps = [
         },
       })),
     transforms: [
-      new FilterRootFields(
-        (operation, rootField) =>
-          operation === 'Query' && rootField === 'contents'
-      ),
+      new FilterRootFields(operation => operation === 'Query'),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
