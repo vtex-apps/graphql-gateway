@@ -33,7 +33,7 @@ const apps = [
     ],
   },
   {
-    app: 'vtex.admin-cms-graphql@0.x',
+    app: 'vtex.admin-cms-graphql-rc@0.x',
     executor: (app: string) =>
       getExecutorForApp(app, ({ vtex: { authToken } }: Context) => ({
         headers: {
@@ -43,9 +43,8 @@ const apps = [
         },
       })),
     transforms: [
-      new FilterRootFields(
-        (operation, rootField) => operation === 'Query' && rootField === 'pages'
-      ),
+      new FilterRootFields(operation => operation === 'Query'),
+      new RenameTypes(name => `${typeName}_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
   },
