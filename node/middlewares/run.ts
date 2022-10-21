@@ -1,5 +1,6 @@
 import { LINKED, MAX_AGE } from '@vtex/api'
 import { runHttpQuery } from 'apollo-server-core'
+import NoIntrospection from 'graphql-disable-introspection'
 
 export default async function run(ctx: Context, next: () => Promise<void>) {
   const {
@@ -20,6 +21,7 @@ export default async function run(ctx: Context, next: () => Promise<void>) {
       schema,
       schemaHash: '' as any,
       tracing: false,
+      validationRules: [NoIntrospection]
     },
     query,
     request,

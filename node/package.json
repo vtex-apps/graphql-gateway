@@ -12,10 +12,11 @@
     "co-body": "^6.0.0",
     "eslint-config-vtex": "^12.8.8",
     "graphql": "^15.3.0",
-    "isomorphic-unfetch": "^3.1.0"
+    "isomorphic-unfetch": "^3.1.0",
+    "graphql-disable-introspection": "^1.2.0"
   },
   "devDependencies": {
-    "@vtex/api": "6.45.4",
+    "@vtex/api": "6.45.12",
     "typescript": "3.9.7",
     "vtex.admin-cms-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.admin-cms-graphql@0.15.0/public/@types/vtex.admin-cms-graphql",
     "vtex.checkout-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-graphql@0.55.1/public/@types/vtex.checkout-graphql",
