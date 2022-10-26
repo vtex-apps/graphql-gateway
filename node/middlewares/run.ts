@@ -9,6 +9,8 @@ export default async function run(ctx: Context, next: () => Promise<void>) {
     request,
   } = ctx
 
+  console.log(request)
+
   const { graphqlResponse, responseInit } = await runHttpQuery([], {
     method,
     options: {
