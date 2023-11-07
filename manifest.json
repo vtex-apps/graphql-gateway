@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "vtex.search-resolver": "1.x",
-    "vtex.checkout-graphql": "0.x",
-    "vtex.admin-cms-graphql": "0.x"
+    "vtex.checkout-graphql": "0.x"
   },
   "credentialType": "absolute",
   "policies": [
@@ -20,9 +19,6 @@
     },
     {
       "name": "vbase-read-write"
-    },
-    {
-      "name": "vtex.admin-cms-graphql:graphql-api"
     },
     {
       "name": "graphql-query"

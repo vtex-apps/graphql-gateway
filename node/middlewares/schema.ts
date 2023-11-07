@@ -38,12 +38,14 @@ const apps = [
       getExecutorForApp(app, ({ vtex: { authToken } }: Context) => ({
         headers: {
           // Add this App's authToken so we have permission to read from Dynamic Storage without the need of the user passing a token
-          // This should be safe since we are only exposing the `pages` query, that should not export any sensitive data
+          // This should be safe since we are only exposing the `contents` query, that should not export any sensitive data
           cookie: `VtexIdclientAutCookie=${authToken}`,
         },
       })),
     transforms: [
-      new FilterRootFields(operation => operation === 'Query'),
+      new FilterRootFields(
+        (operation, rootField) => operation === 'Query' && rootField === 'contents'
+      ),
       new RenameTypes(name => `${typeName}_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
