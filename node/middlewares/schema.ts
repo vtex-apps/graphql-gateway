@@ -1,6 +1,5 @@
 import { mergeSchemas } from '@graphql-tools/merge'
 import {
-  FilterRootFields,
   introspectSchema,
   RenameTypes,
   wrapSchema,
@@ -31,25 +30,7 @@ const apps = [
       new RenameTypes(name => `${typeName}_${name}`),
       new NamespaceUnderFieldTransform(typeName, fieldName),
     ],
-  },
-  {
-    app: 'vtex.admin-cms-graphql-rc@0.x',
-    executor: (app: string) =>
-      getExecutorForApp(app, ({ vtex: { authToken } }: Context) => ({
-        headers: {
-          // Add this App's authToken so we have permission to read from Dynamic Storage without the need of the user passing a token
-          // This should be safe since we are only exposing the `contents` query, that should not export any sensitive data
-          cookie: `VtexIdclientAutCookie=${authToken}`,
-        },
-      })),
-    transforms: [
-      new FilterRootFields(
-        (operation, rootField) => operation === 'Query' && rootField === 'contents'
-      ),
-      new RenameTypes(name => `${typeName}_${name}`),
-      new NamespaceUnderFieldTransform(typeName, fieldName),
-    ],
-  },
+  }
 ]
 
 export default async function schema(ctx: Context, next: () => Promise<void>) {
